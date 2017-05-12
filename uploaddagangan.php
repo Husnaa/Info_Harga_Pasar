@@ -1,3 +1,30 @@
+<?php
+	
+	if (isset($_POST["submit"])) {
+		
+		$error = $_FILES["file_upload"]["error"];
+		
+	
+		
+			$nama_dagangan=$_POST["nama_dagangan"];
+			$harga=$_POST["harga"];
+			$foto_barang=$_POST["foto_barang"];
+			$nama_folder="folder upload";
+			$tmp =$_FILES["file_upload"]["tmp_name"];
+			$nama_file=$_FILES["file_upload"]["name"];
+			move_uploaded_file($tmp,"$nama_folder/$nama_file");
+			
+			include('konek.php');
+			$nama_dagangan=mysqli_real_escape_string($conn,$nama_dagangan);
+			$harga=mysqli_real_escape_string($conn,$harga);
+			$foto_barang=mysqli_real_escape_string($conn,$foto_barang);
+			
+			
+			$query1="INSERT INTO dagangan VALUES ('$nama_dagangan','$harga','$foto_barang','a')";
+			$hasil1=mysqli_query($conn,$query1);
+	}
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -77,7 +104,9 @@ input {
         <div class="modal-body">
 		<form action="#" method="post" enctype="multipart/form-data">
 			<p><input type="file" name="file_upload"></p>
-			<p><input type="text" name="ket" placeholder="story your photo"></p>
+			<p><input type="text" name="nama_dagangan" placeholder="nama dagangan"></p>
+			<p><input type="text" name="harga" placeholder="harga"></p>
+			
 			<input type="submit" name="submit" value="save">
 		</form>
         </div>
