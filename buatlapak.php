@@ -1,8 +1,12 @@
+
 <?php
+	session_start();
 	if(isset($_POST["submit"])){
 
 	$nama=trim($_POST["nama"]);
 	$jenis=trim($_POST["jenis"]);
+	$alamat=trim($_POST["alamat"]);
+	$id=$_SESSION['rpl'];
 	
 	$error="";
 	
@@ -11,13 +15,13 @@
 
 		include("konek.php");
 		
-		$login="INSERT INTO kedai (username,nama_kedai,jenis_kedai)  VALUES ('wahyu','$nama','$jenis')";
+		$login="INSERT INTO kedai (nama_kedai,jenis_kedai,alamat,id_fk)  VALUES ('$nama','$jenis','$alamat','$id')";
 		$input=mysqli_query($conn,$login);
 			if($input){
-				echo "<script>alert('lapak anda sudah dibuat')</script>";
+				header('location:uploaddagangan.php');
 			}
 			else{
-				echo "<script>alert('lapak sudah digunakan')</script>";
+				echo "<script>alert('nama lapak sudah digunakan')</script>";
 			}
 		}
 	}
@@ -91,7 +95,6 @@ input {
 
 		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		      <ul class="nav navbar-nav navbar-right">
-		        <li><a href="login.html">Login</a></li>
 		      </ul>
 		</nav>
 
@@ -105,8 +108,10 @@ input {
 			<div class="form-input">
 				<input type="text" name="jenis" placeholder="jenis dagangan" required="required" >
 			</div>
+			<div class="form-input">
+				<input type="text" name="alamat" placeholder="alamat" required="required" >
+			</div>
 			<input class="btn btn-primary" type="submit" name="submit" value="daftar">
-			<button type="reset" class="btn btn-primary"><i class="glyphicon glyphicon-repeat"></i>  Reset</button>
 		 </form>
 		</div>
 </body>
