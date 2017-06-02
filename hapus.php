@@ -51,7 +51,7 @@ if(isset($_POST["hapus"])){
 				<div class="modal-body">
 						<form action="#" method="post">
 							<input id="ok" type="number" value="" name="id" readonly style="display:none"/>
-							<p> anda akan menghapus dagangan ini !</p>
+							<p> anda akan menghapus dagangan ini  !</p>
 							<input type='submit' class="form-control" style="width:100px" value="hapus" name="hapus">
 						</form>
 				</div>
